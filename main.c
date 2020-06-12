@@ -24,7 +24,7 @@
 
 int main()
 {
-    LinkedList* miLista = ll_newLinkedList();
+    LinkedList* miLista = ll_newLinkedList();                                               // Inicializo la LinkedList
 
     int opcion;
 
@@ -39,14 +39,14 @@ int main()
         printf("2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).\n");
         printf("3. Alta de empleado.\n");
         printf("4. Modificar datos de empleado.\n");
-        printf("5. Baja de empleado.\n");
+        printf("5. Baja de empleado.\n");                                                               // Menu de opciones
         printf("6. Listar empleados.\n");
         printf("7. Ordenar empleados.\n");
         printf("8. Guardar los datos de los empleados en el archivo data.csv (modo texto).\n");
         printf("9. Guardar los datos de los empleados en el archivo data.csv (modo binario).\n");
         printf("10. Salir.\n");
 
-        opcion = getInt("Ingrese una opcion: ", "Error. Vuelva a intentarlo: ", 1, 10);
+        opcion = getInt("Ingrese una opcion: ", "Error. Vuelva a intentarlo: ", 1, 10);                 // Toma la opcion que elige el usuario
 
         switch(opcion)
         {
@@ -54,18 +54,23 @@ int main()
             controller_loadFromText("data.csv", miLista);
             break;
         case 2:
+            controller_ListEmployee(miLista);
             controller_loadFromBinary("data.bin", miLista);
             break;
         case 3:
+            controller_ListEmployee(miLista);
+
             controller_addEmployee(miLista);
             break;
         case 4:
+            controller_ListEmployee(miLista);
+
             validarModificacion = controller_editEmployee(miLista);
             if(validarModificacion == 0)
             {
                 printf("\nEl empleado ha sido modificado con exito.\n");
             }
-            else
+            else                                                                    // Valida si la modificacion fue realizada o no y avisa al usuario
             {
                 printf("\nHubo un error al modificar al empleado.\n");
             }
@@ -76,7 +81,7 @@ int main()
             {
                 printf("\nEl empleado ha sido dado de baja con exito.\n");
             }
-            else
+            else                                                                    // Valida si la baja fue realizada o no y avisa al usuario
             {
                 printf("\nHubo un error al dar de baja al empleado.\n");
             }
@@ -90,7 +95,7 @@ int main()
             {
                 printf("\nEl listado de empleados fue ordenado con exito.\n");
             }
-            else
+            else                                                                     // Valida si el ordenamiento fue realizado o no y avisa al usuario
             {
                 printf("\nHubo un error al ordenar el listado de los empleados.\n");
             }
@@ -106,10 +111,10 @@ int main()
             break;
         }
 
-        system("\npause\n");
-        system("cls");
+        system("\npause\n");                // Pausa la consola
+        system("cls");                      // Limpia la consola
 
-    }while(opcion != 10);
+    }while(opcion != 10);                   // sale del loop si el usuario elige la opcion 10 ("Salir")
 
     return 0;
 }

@@ -10,7 +10,7 @@ Employee* employee_new()
 
     if(auxEmployee != NULL)
     {
-        auxEmployee->id = 0;
+        auxEmployee->id = 0;                                // Crea un nuevo empleado sin datos
         strcpy(auxEmployee->nombre, " ");
         auxEmployee->horasTrabajadas = 0;
         auxEmployee->sueldo = 0;
@@ -22,7 +22,7 @@ Employee* employee_new()
 Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajadasStr,char* sueldoStr)
 {
     Employee* auxEmployee;
-    auxEmployee = employee_new();
+    auxEmployee = employee_new();                           // Crea un nuevo empleado sin datos
 
     int id;
     char nombre[128];
@@ -30,14 +30,14 @@ Employee* employee_newParametros(char* idStr,char* nombreStr,char* horasTrabajad
     int sueldo;
 
     id = atoi(idStr);
-    strcpy(nombre, nombreStr);
+    strcpy(nombre, nombreStr);                              // copio los datos de char a su tipo de variable original
     horasTrabajadas = atoi(horasTrabajadasStr);
     sueldo = atoi(sueldoStr);
 
     if(auxEmployee != NULL)
     {
         employee_setId(auxEmployee, id);
-        employee_setNombre(auxEmployee, nombre);
+        employee_setNombre(auxEmployee, nombre);                    // Asigno los datos al empleado en la posicion del listado
         employee_setHorasTrabajadas(auxEmployee, horasTrabajadas);
         employee_setSueldo(auxEmployee, sueldo);
     }
@@ -48,11 +48,11 @@ int employee_setNombre(Employee* this,char* nombre)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                        // verifica que el empleado no sea nulo
     {
         if(onlyLetters(nombre) == 0)
         {
-            strcpy(this->nombre, nombre);
+            strcpy(this->nombre, nombre);           // Copia el dato nombre pasado por parametro a el empleado del listado pasado por parametro
             respuesta = 0;
         }
     }
@@ -67,9 +67,9 @@ int employee_getNombre(Employee* this,char* nombre)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                            // verifica que el empleado no sea nulo
     {
-        strcpy(nombre, this->nombre);
+        strcpy(nombre, this->nombre);                       // copia el dato nombre del empleado en el listado pasado por parametro y lo devuelve como puntero
         respuesta = 0;
     }
     else
@@ -84,11 +84,11 @@ int employee_setSueldo(Employee* this,int sueldo)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                    // verifica que el empleado no sea nulo
     {
-        if(sueldo != NULL && sueldo > 0)
+        if(sueldo > 0)                      // verifica que el sueldo no sea negativo
         {
-            this->sueldo = sueldo;
+            this->sueldo = sueldo;                         // Copia el sueldo pasado por parametro en el empleado del listado pasado por parametro
             respuesta = 0;
         }
     }
@@ -103,11 +103,11 @@ int employee_getSueldo(Employee* this,int* sueldo)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                        // Verifica que el empleado pasado por parametro no sea nulo
     {
-        if(sueldo != NULL && sueldo > 0)
+        if(sueldo != NULL && sueldo > 0)    // Verifica que el sueldo pasado por parametro no sea nulo o negativo
         {
-            *sueldo = this->sueldo;
+            *sueldo = this->sueldo;            // copia el sueldo pasado por parametro a el empleado del listado pasado por parametro
             respuesta = 0;
         }
     }
@@ -122,11 +122,11 @@ int employee_setId(Employee* this,int id)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                        // Verifica que el empleado no sea nulo
     {
-        if(id != NULL && id >= 0)
+        if(id >= 0)                         // Verifica que le ID sea positivo
         {
-            this->id = id;
+            this->id = id;                  // Copia el id ingresado por parametro a el empleado del listado pasado por parametro
             respuesta = 0;
         }
     }
@@ -141,11 +141,11 @@ int employee_getId(Employee* this, int* id)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                        // Verifica que el empleado no sea nulo
     {
-        if(id != NULL && id >= 0)
+        if(id >= 0)                         // verifica que el ID sea positivo
         {
-            *id = this->id;
+            *id = this->id;                 // Copia el ID del empleado y lo pasa por parametro
             respuesta = 0;
         }
     }
@@ -160,11 +160,11 @@ int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                            // Verifica que el empleado no sea nulo
     {
-        if(horasTrabajadas != NULL && horasTrabajadas > 0)
+        if(horasTrabajadas > 0)                 // verifica que las horas pasadas por parametro sean positivas
         {
-            this->horasTrabajadas = horasTrabajadas;
+            this->horasTrabajadas = horasTrabajadas;        // Copia las horas en el empleado del listado
             respuesta = 0;
         }
     }
@@ -179,11 +179,11 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajdas)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                                        // verifica que el empleado no sea nulo
     {
-        if(horasTrabajdas != NULL && horasTrabajdas > 0)
+        if(horasTrabajdas != NULL && horasTrabajdas > 0)       // verifica que las horas no sean nulas y negativas
         {
-            *horasTrabajdas = this->horasTrabajadas;
+            *horasTrabajdas = this->horasTrabajadas;           // copia las horas del empleado en el listado y las pasa por parametro
             respuesta = 0;
         }
     }
@@ -197,13 +197,13 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajdas)
 int employee_CompareByName(Employee* e1, Employee* e2)
 {
     int respuesta;
-    char nombreUno[128];
+    char nombreUno[128];                            // planteo variables para aclarar el codigo
     char nombreDos[128];
 
-    employee_getNombre(e1, nombreUno);
+    employee_getNombre(e1, nombreUno);                 // tomo los nombres de los empleados pasados por parametro y los copio a las varibles
     employee_getNombre(e2, nombreDos);
 
-    if(strcmp(nombreUno, nombreDos) < 0)
+    if(strcmp(nombreUno, nombreDos) < 0)                   // comparo los nombres
     {
         respuesta = 1;
     }
@@ -211,13 +211,13 @@ int employee_CompareByName(Employee* e1, Employee* e2)
     {
         if(strcmp(nombreUno, nombreDos) > 0)
         {
-            respuesta = -1;
+            respuesta = 0;
         }
         else
         {
-            if(strcmp(nombreUno, nombreDos) == 0)
+            if(strcmp(nombreUno, nombreDos) == 0)           // si los nombres empiezan con la misma letra y no pueden ordenarse
             {
-                employee_CompareById(e1, e2);
+                employee_CompareById(e1, e2);               // llamo a la comparacion por ID
             }
         }
     }
@@ -228,13 +228,13 @@ int employee_CompareByName(Employee* e1, Employee* e2)
 int employee_CompareById(Employee* e1, Employee* e2)
 {
     int respuesta;
-    int idUno;
+    int idUno;                                      // planteo variables para aclarar el codigo
     int idDos;
 
-    employee_getId(e1, &idUno);
+    employee_getId(e1, &idUno);                        // copio los id de los empleados pasados por parametro a las varibles
     employee_getId(e2, &idDos);
 
-    if(idUno > idDos)
+    if(idUno > idDos)                   // comparo los ID
     {
         respuesta = 0;
     }
@@ -252,9 +252,9 @@ int employee_removeEmployee(Employee* this)
 {
     int respuesta;
 
-    if(this != NULL)
+    if(this != NULL)                // verifica que el empleado pasado por parametro no sea nulo
     {
-        free(this);
+        free(this);                 // libera el espacio que ocupa el empleado en el listado
         respuesta = 0;
     }
     else

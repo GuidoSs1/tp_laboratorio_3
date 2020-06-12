@@ -18,19 +18,19 @@ int parser_EmployeeFromText(FILE* pFile, LinkedList* pArrayListEmployee)
 
     if(pFile != NULL)
     {
-        while(!feof(pFile)){
+        while(!feof(pFile)){                    // recorre el archivo hasta la linea final
             if(flag == 0)
             {
                 fscanf(pFile, "%[^,], %[^,], %[^,], %[^\n]", idChar, nombre, horasTrabajadasChar, sueldoChar);
-                printf("\n%s \t%10s \t%10s \t%5s\n", idChar, nombre, horasTrabajadasChar, sueldoChar);
+                printf("\n%s \t%10s \t%10s \t%5s\n", idChar, nombre, horasTrabajadasChar, sueldoChar);              // lee la primera linea del archivo y la mustra de otra forma
                 flag = 1;
             }
             fscanf(pFile, "%[^,], %[^,], %[^,], %[^\n]", idChar, nombre, horasTrabajadasChar, sueldoChar);
-            printf("\n%10s \t%10s \t%10s \t%10s\n", idChar, nombre, horasTrabajadasChar, sueldoChar);
+            printf("\n%10s \t%10s \t%10s \t%10s\n", idChar, nombre, horasTrabajadasChar, sueldoChar);                  // lee todas las lineas del archivo y las muestra
             auxEmployee = employee_newParametros(idChar, nombre, horasTrabajadasChar, sueldoChar);
-            if(auxEmployee != NULL)
+            if(auxEmployee != NULL)                         // verifica si el puntero es nulo
             {
-                ll_add(pArrayListEmployee, auxEmployee);
+                ll_add(pArrayListEmployee, auxEmployee);            // agrega el puntero al listado
                 respuesta = 0;
             }
 
@@ -50,12 +50,12 @@ int parser_EmployeeFromBinary(FILE* pFile, LinkedList* pArrayListEmployee)
     Employee* auxEmployee;
     int respuesta;
 
-    if(pFile != NULL)
+    if(pFile != NULL)                       // verifica que el archivo no sea nulo
     {
-        while(!feof(pFile))
+        while(!feof(pFile))                         // recorre el archivo hasta el final
         {
             auxEmployee = employee_new();
-            fread(auxEmployee, sizeof(Employee), 1, pFile);
+            fread(auxEmployee, sizeof(Employee), 1, pFile);             // lee los datos del archivo y agrega el puntero
             ll_add(pArrayListEmployee, auxEmployee);
         }
         respuesta = 0;
